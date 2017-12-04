@@ -1,17 +1,25 @@
 package resources;
 
-import 
+import Main.Gare;
+import internals.Train;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
 public class TrainsResource extends ServerResource {
 	
 	private Gare gare_;
 	
-	private List<Trains> trains_;
+	private List<Train> trains_;
 
 	public TrainsResource(){
 	     super();	
@@ -30,16 +38,16 @@ public class TrainsResource extends ServerResource {
 	        while(it.hasNext()){
 	        	train = it.next();
 	        	String etat = "";
-	        	if(train.getEtat == 0){
+	        	if(train.getEtat() == 0){
 	        		etat = "en route vers la gare";
 	        	}
-	        	else if(train.getEtat == 1){
+	        	else if(train.getEtat() == 1){
 	        		etat = "en attente d'une voie libre";
 	        	}
-	        	else if(train.getEtat == 2){
+	        	else if(train.getEtat() == 2){
 	        		etat = "garé";
 	        	}
-	        	else if(train.getEtat == 3){
+	        	else if(train.getEtat() == 3){
 	        		etat = "reparti";
 	        	}
 	        	JSONObject current = new JSONObject();
@@ -70,7 +78,7 @@ public class TrainsResource extends ServerResource {
 	        
 	        // generate result
 	        JSONObject resultObject = new JSONObject();
-	        resultObject.put("train", "Train " + train.getId()");
+	        resultObject.put("train", "Train " + train.getId());
 	        JsonRepresentation result = new JsonRepresentation(resultObject);
 	        return result;
 	    }

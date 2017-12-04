@@ -61,7 +61,7 @@ public class Train extends Thread{
 		this.etat = etat;
 	}
 	
-	public int getId(){
+	public int getIdTrain(){
 		return this.id;
 	}
 

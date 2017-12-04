@@ -1,3 +1,6 @@
+package Main;
+
+import application.MyGareApplication;
 import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.Context;

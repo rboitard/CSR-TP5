@@ -1,17 +1,29 @@
 package resources;
 
+import Main.Gare;
+import internals.Train;
+import internals.Voyageur;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.restlet.representation.Representation;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
+import org.restlet.ext.json.JsonRepresentation;
+import org.restlet.representation.Representation;
 
-public class VoyageurResource extends ServerResource {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
+public class VoyageursResource extends ServerResource {
 	
 	private Gare gare_;
 	
 	private List<Voyageur> voyageur_;
 
-	public VoyageurResource(){
+	public VoyageursResource(){
 	     super();	
 	     this.gare_ = (Gare) getApplication().getContext().getAttributes().get("gare");
 	    }
@@ -28,13 +40,13 @@ public class VoyageurResource extends ServerResource {
 	        while(it.hasNext()){
 	        	voyageur = it.next();
 	        	String etat = "";
-	        	if(train.getEtat == 0){
+	        	if(voyageur.getEtat() == 0){
 	        		etat = "en route vers la gare";
 	        	}
-	        	else if(train.getEtat == 1){
+	        	else if(voyageur.getEtat() == 1){
 	        		etat = "muni d'un ticket";
 	        	}
-	        	else if(train.getEtat == 2){
+	        	else if(voyageur.getEtat() == 2){
 	        		etat = "monté dans un train";
 	        	}
 	        	JSONObject current = new JSONObject();
@@ -56,14 +68,14 @@ public class VoyageurResource extends ServerResource {
 	        
 	        //création du train
 	        int id = (int) getRequest().getAttributes().get("id");
-	        Voyageur voyageur = new Train(this.gare_.getEspaceQuai(), this.gare_.getEspaceVente(), id);
+	        Voyageur voyageur = new Voyageur(this.gare_.getEspaceQuai(), this.gare_.getEspaceVente(), id);
 	        
 	        //ajout du train
 	        this.gare_.addVoyageur(voyageur);
 	        
 	        // generate result
 	        JSONObject resultObject = new JSONObject();
-	        resultObject.put(""voyageur", "Voyageur " + voyageur.getId()");
+	        resultObject.put("voyageur", "Voyageur " + voyageur.getId());
 	        JsonRepresentation result = new JsonRepresentation(resultObject);
 	        return result;
 	    }

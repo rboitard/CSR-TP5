@@ -35,7 +35,7 @@ public class Voyageur extends Thread{
 		this.etat = etat;
 	}
 	
-	public int getId(){
+	public int getIdVoyageur(){
 		return this.id;
 	}
 	

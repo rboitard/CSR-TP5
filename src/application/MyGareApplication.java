@@ -5,7 +5,7 @@ import org.restlet.Context;
 import org.restlet.Restlet;
 import org.restlet.routing.Router;
 import resources.TrainsResource;
-import resoucres.VoyageurResource;
+import resources.VoyageursResource;
 
 public class MyGareApplication extends Application{
 
@@ -18,7 +18,7 @@ public class MyGareApplication extends Application{
     public Restlet createInboundRoot()
     {
         Router router = new Router(getContext());
-        router.attach("/voyageurs", VoyagerusResource.class);
+        router.attach("/voyageurs", VoyageursResource.class);
         router.attach("/trains", TrainsResource.class);
         return router;
     }

@@ -40,11 +40,11 @@ public class Gare {
 		return this.listVoyageur.iterator();
 	}
 	
-	public EspaceQuai espaceQuai(){
+	public EspaceQuai getEspaceQuai(){
 		return this.espaceQuai;
 	}
 	
-	public EspaceVente espaceVente(){
+	public EspaceVente getEspaceVente(){
 		return this.espaceVente;
 	}
 	
